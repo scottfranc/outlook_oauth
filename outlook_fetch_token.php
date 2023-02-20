@@ -1,11 +1,11 @@
 <?php
 // Prerequisites:
-// The Client ID, The Tenant ID, The secret client, The redirect url, they will be included in another email/message
+// The Client ID, The Tenant ID, The secret client.
 
 $TENANT_ID="b55...028";
 $CLIENT_ID="72f...978";
-$SCOPE="https://outlook.office365.com/IMAP.AccessAsUser.All"; //You may need to replace this with an SMTP version
-$REDIRECT_URL="https://ibex.bg/getAtokenNet";
+$SCOPE="https://outlook.office365.com/IMAP.AccessAsUser.All"; //This is specifically for IMAP connection, you will need to replace this if you are using POP3 or SMTP.
+$REDIRECT_URL="https://ibex.bg/getAtokenNet"; //you can change this to be anything, preferably on your domain
 
 $authUri = 'https://login.microsoftonline.com/' . $TENANT_ID
            . '/oauth2/v2.0/authorize?client_id=' . $CLIENT_ID
@@ -14,9 +14,9 @@ $authUri = 'https://login.microsoftonline.com/' . $TENANT_ID
            . '&response_type=code'
            . '&approval_prompt=auto';
 
-echo($authUri); //this would print a URL string for you to copy into the browser and visit, when you visit this link, you will need to log into invoices@ibex.bg or be already logged it into it, after accessing it.
+echo($authUri); //this would print a URL string for you to copy into the browser and visit, when you visit this link, you will need to log into your Microsoft Exchange account or be already logged it into it.
 
-//Once it is done, you should have a link in the address bar like "https://ibex.bg/getAtokenNet?code=ioPFnco...&session_state=d80fw1..." A code (remove the "&" at the end) and a session_state ID
+//Once it is done, you should have a link in the address bar like "https://website.tld/getAtokenNet?code=ioPFnco...&session_state=d80fw1..." A code (remove the "&" at the end) and a session_state ID
 
 //Next step is to fetch an access token
 
@@ -25,7 +25,6 @@ $CLIENT_SECRET="Y~tN...";
 $SCOPE="https://outlook.office365.com/IMAP.AccessAsUser.All offline_access"; //NOTE the "offline_access" keyword.
 $CODE="ioPFnco...";
 $SESSION="d80fw1...";
-$REDIRECT_URL="https://ibex.bg/getAtokenNet";
 
 echo "Authenticating session...";
 
@@ -55,8 +54,8 @@ var_dump($tokenResult); //here you will have the access token and refresh code.
 //we then connect to the Microsoft Outlook Server using IMAP Protocol like below:
 
 $mailbox = '{outlook.office365.com:993/imap/ssl}';
-$username = 'invoices@ibex.bg'; //invoices, for you
-$accessToken = "eyJ0eXAiOiJ...FA";
+$username = 'email@company.tld'; //your email address
+$accessToken = "eyh(S...FA";
 
 $inbox = imap2_open($mailbox, $username, $accessToken, OP_XOAUTH2);
 
