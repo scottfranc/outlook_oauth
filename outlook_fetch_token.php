@@ -5,7 +5,7 @@
 $TENANT_ID="b55...028";
 $CLIENT_ID="72f...978";
 $SCOPE="https://outlook.office365.com/IMAP.AccessAsUser.All"; //This is specifically for IMAP connection, you will need to replace this if you are using POP3 or SMTP.
-$REDIRECT_URL="https://ibex.bg/getAtokenNet"; //you can change this to be anything, preferably on your domain
+$REDIRECT_URL="https://website.tld/getAtokenNet"; //you can change this to be anything, preferably on your domain
 
 $authUri = 'https://login.microsoftonline.com/' . $TENANT_ID
            . '/oauth2/v2.0/authorize?client_id=' . $CLIENT_ID
